@@ -3,7 +3,7 @@ import { Book } from 'book';
 
 @Injectable()
 export class AppService {
-  private readonly books: Book[] = [ 
+  private books: Book[] = [ 
     { id: 123, title: "A Tale of Two Cities", author: "Charles Dickens" },
 ];
 
@@ -11,8 +11,8 @@ export class AppService {
     return this.books;
   }
 
-  insertBook(book: Book) {
-    this.books.push(book);
+  insertBooks(books: Book[]) {
+    this.books = this.books.concat(books);
   }
 
   deleteBook(id: Number) {
