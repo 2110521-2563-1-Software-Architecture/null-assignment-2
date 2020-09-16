@@ -26,8 +26,10 @@ server.addService(booksProto.books.BookService.service, {
     },
     insertBooks: ({request}, callback) => {
         const {books: newBooks} = request;
-        books = [...books, ...newBooks];
+        [...books, ...newBooks];
+        // setTimeout(() => {
         callback(null, {});
+        // }, 100);
     },
     get: ({request}, callback) => {
         const id = parseInt(request.id);

@@ -12,7 +12,7 @@ export class AppService {
   }
 
   insertBooks(books: Book[]) {
-    this.books = this.books.concat(books);
+    this.books.concat(books);
   }
 
   deleteBook(id: Number) {
