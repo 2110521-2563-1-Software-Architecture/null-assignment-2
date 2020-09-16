@@ -13,22 +13,49 @@ const printResponse = (err, books) => {
     }
 };
 
-const listBooks = () => client.list({}, printResponse);
+const listBooks = () => {
+    return new Promise((resolve, reject) => {
+        client.list({}, (err, res) => {
+            if (err !== null) reject(err);
+            else (resolve(res));
+        });
+    });
+};
 const insertBook = (id, title, author) => {
     const book = {id: parseInt(id), title, author};
-    client.insert(book, printResponse);
+    return new Promise((resolve, reject) => {
+        client.insert(book, (err, res) => {
+            if (err !== null) reject(err);
+            else (resolve(res));
+        });
+    });
 }
 // use array of books so that client won't need to create new array every request
 const insertBooks = (books) => {
-    client.insertBooks({books: books}, printResponse); 
+    return new Promise((resolve, reject) => {
+        client.insertBooks({books: books}, (err, res) => {
+            if (err !== null) reject(err);
+            else (resolve(res));
+        });
+    });
 }
 const getBook = (id) => {
     const bookIdRequest = {id: parseInt(id)};
-    client.get(bookIdRequest, printResponse);
+    return new Promise((resolve, reject) => {
+        client.get(bookIdRequest, (err, res) => {
+            if (err !== null) reject(err);
+            else (resolve(res));
+        });
+    });
 }
 const deleteBook = (id) => {
     const bookIdRequest = {id: parseInt(id)};
-    client.delete(bookIdRequest, printResponse);
+    return new Promise((resolve, reject) => {
+        client.delete(bookIdRequest, (err, res) => {
+            if (err !== null) reject(err);
+            else (resolve(res));
+        });
+    });
 }
 const watchBooks = () => {
     const call = client.watch({});
@@ -38,6 +65,14 @@ const watchBooks = () => {
 }
 
 
+module.exports = {
+    listBooks,
+    insertBook,
+    insertBooks,
+    getBook,
+    deleteBook,
+    watchBooks,
+};
 
 
 // const [processName, scriptName, command, ...args] = process.argv;
