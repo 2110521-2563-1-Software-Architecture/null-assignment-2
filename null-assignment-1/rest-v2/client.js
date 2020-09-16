@@ -1,22 +1,22 @@
 const request = require("superagent");
 
 const listBooks = async () => {
-    await request.get('http://localhost:3000/books/list')
+    return await request.get('http://localhost:3000/books/list')
 }
 const insertBook = async (id, title, author) => {
-    await request.post("http://localhost:3000/books/insert")
+    return await request.post("http://localhost:3000/books/insert")
     .send({id: parseInt(id), title, author})
 }
 const insertBooks = async (books) => {
-    await request.post("http://localhost:3000/books/insertMany")
+    return await request.post("http://localhost:3000/books/insertMany")
     .send({books})
 }
 const getBook = async (id) => {
-    await request.get("http://localhost:3000/books/get")
+    return await request.get("http://localhost:3000/books/get")
     .query("id="+String(id))
 }
 const deleteBook = async (id) => {
-    await request.delete("http://localhost:3000/books/delete")
+    return await request.delete("http://localhost:3000/books/delete")
     .query("id=" + String(id))
 }
 
@@ -26,7 +26,6 @@ module.exports = {
     insertBooks,
     getBook,
     deleteBook,
-    watchBooks,
 };
 
 
