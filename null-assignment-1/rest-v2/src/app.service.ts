@@ -11,6 +11,10 @@ export class AppService {
     return this.books;
   }
 
+  insertBook(book: Book) {
+    this.books.push(book);
+  }
+
   insertBooks(books: Book[]) {
     this.books.concat(books);
   }
