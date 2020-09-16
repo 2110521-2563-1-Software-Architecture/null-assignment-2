@@ -26,7 +26,7 @@ export class AppController {
     description: "Book to insert",
     type: Book,
   })
-  insertBook(@Body() book: Book[]) {
+  insertBook(@Body("books") book: Book[]) {
     return this.appService.insertBooks(book);
   }
 

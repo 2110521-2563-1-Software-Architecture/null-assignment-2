@@ -18,6 +18,10 @@ const insertBook = (id, title, author) => {
     const book = {id: parseInt(id), title, author};
     client.insert(book, printResponse);
 }
+// use array of books so that client won't need to create new array every request
+const insertBooks = (books) => {
+    client.insertBooks({books: books}, printResponse); 
+}
 const getBook = (id) => {
     const bookIdRequest = {id: parseInt(id)};
     client.get(bookIdRequest, printResponse);
@@ -33,22 +37,33 @@ const watchBooks = () => {
     });
 }
 
-const [processName, scriptName, command, ...args] = process.argv;
-if (command === "list")
-    listBooks();
-else if (command === "insert") 
-    insertBook(args[0], args[1], args[2]);
-else if (command === "get")
-    getBook(args[0]);
-else if (command === "delete")
-    deleteBook(args[0]);
-else if (command === "watch")
-    watchBooks()
-else {
-    console.log(`Usage:
-node client.js list                            List all books
-node client.js insert <id> <title> <author>    Insert a book
-node client.js get <id>                        Get a book by its ID
-node client.js delete <id>                     Delete a book by its ID
-node client.js watch                           Watch for inserted books`);
-}
+
+
+
+// const [processName, scriptName, command, ...args] = process.argv;
+// if (command === "list")
+//     listBooks();
+// else if (command === "insert") 
+//     insertBook(args[0], args[1], args[2]);
+// else if (command === "get")
+//     getBook(args[0]);
+// else if (command === "delete")
+//     deleteBook(args[0]);
+// else if (command === "watch")
+//     watchBooks()
+// else if (command == "insertMany") {
+//     const n = parseInt(args[3]);
+//     const book = {id: parseInt(args[0]), title: args[1], author: args[2]};
+//     const books = [];
+//     for (let i=0; i<n; i++)
+//         books.push(book);
+//     insertBooks(books);    
+// }
+// else {
+//     console.log(`Usage:
+// node client.js list                            List all books
+// node client.js insert <id> <title> <author>    Insert a book
+// node client.js get <id>                        Get a book by its ID
+// node client.js delete <id>                     Delete a book by its ID
+// node client.js watch                           Watch for inserted books`);
+// }

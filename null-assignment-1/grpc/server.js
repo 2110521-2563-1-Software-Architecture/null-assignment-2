@@ -8,7 +8,7 @@ const booksProto = grpc.load("books.proto");
 const server = new grpc.Server();
 
 // in-memory book array as database
-const books = [ 
+books = [ 
     { id: 123, title: "A Tale of Two Cities", author: "Charles Dickens" },
 ];
 
@@ -18,10 +18,15 @@ server.addService(booksProto.books.BookService.service, {
     },
     insert: ({request}, callback) => {
         const book = request;
-        
+        // console.log(books);
+
         books.push(book);
         bookStream.emit("new_book", book);
-
+        callback(null, {});
+    },
+    insertBooks: ({request}, callback) => {
+        const {books: newBooks} = request;
+        books = [...books, ...newBooks];
         callback(null, {});
     },
     get: ({request}, callback) => {
