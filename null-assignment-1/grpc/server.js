@@ -26,7 +26,7 @@ server.addService(booksProto.books.BookService.service, {
     },
     insertBooks: ({request}, callback) => {
         const {books: newBooks} = request;
-        [...books, ...newBooks];
+        books = [...books, ...newBooks];
         // setTimeout(() => {
         callback(null, {});
         // }, 100);
